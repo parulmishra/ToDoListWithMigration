@@ -5,12 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Home\**" />
+    <Compile Remove="Controllers\Item\**" />
+    <Content Remove="Controllers\Home\**" />
+    <Content Remove="Controllers\Item\**" />
+    <EmbeddedResource Remove="Controllers\Home\**" />
+    <EmbeddedResource Remove="Controllers\Item\**" />
+    <None Remove="Controllers\Home\**" />
+    <None Remove="Controllers\Item\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="1.1.2" />

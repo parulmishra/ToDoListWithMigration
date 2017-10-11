@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using ToDoListWithMigrations.Models;
-
+using Microsoft.Extensions.Logging;
 
 namespace ToDoListWithMigrations
 {
@@ -22,15 +22,26 @@ namespace ToDoListWithMigrations
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddEntityFramework()
                 .AddDbContext<ToDoDbContext>(options =>
                     options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
         }
 
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+            loggerFactory.AddConsole();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.Run(async (context) =>
             {
